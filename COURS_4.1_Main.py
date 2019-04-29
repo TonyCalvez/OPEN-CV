@@ -6,6 +6,7 @@ import math
 
 def niveaudegris(nomimage):
     img = cv2.imread(nomimage, 0)
+    cv2.imshow('Niveau de Gris :', img)
     return img
 
 
@@ -105,15 +106,15 @@ def dilate(img):
     cv2.imshow('Dilation', dilation)
 
 def openingclosing(img):
-    kernel = np.ones((5, 5), np.uint8)
+    kernel = np.ones((2, 2), np.uint8)
     opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
     closing = cv2.morphologyEx(opening, cv2.MORPH_CLOSE, kernel)
     cv2.imshow('Opening-Closing :',closing)
 
 if __name__ == "__main__":
-    img = niveaudegris('voilier_oies_blanches.jpg')
-    # img = niveaudegris(img)
-    img = imagebinariseinv(img,128)
+    img = niveaudegris('code_postal.png')
+
+    img = imagebinariseinv(img,135)
     img = openingclosing(img)
     cv2.waitKey(0)
-    cv2.destroyAllWindows() 
+    cv2.destroyAllWindows()  
