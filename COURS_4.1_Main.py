@@ -106,15 +106,23 @@ def dilate(img):
     cv2.imshow('Dilation', dilation)
 
 def openingclosing(img):
-    kernel = np.ones((2, 2), np.uint8)
+    kernel = np.ones((3, 3), np.uint8)
     opening = cv2.morphologyEx(img, cv2.MORPH_OPEN, kernel)
     closing = cv2.morphologyEx(opening, cv2.MORPH_CLOSE, kernel)
     cv2.imshow('Opening-Closing :',closing)
 
-if __name__ == "__main__":
-    img = niveaudegris('code_postal.png')
+def morphological(img):
+    kernel = np.ones((3, 3), np.uint8)
+    gradient = cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel)
+    cv2.imshow('Gradient:', gradient)
 
-    img = imagebinariseinv(img,135)
-    img = openingclosing(img)
+def etiquageconnexes(img):
+    pass
+
+if __name__ == "__main__":
+    img = niveaudegris('voilier_oies_blanches.jpg')
+    img = imagebinariseinv(img,255)
+    plt.imshow(img, plt='jet')
+
     cv2.waitKey(0)
     cv2.destroyAllWindows()  
